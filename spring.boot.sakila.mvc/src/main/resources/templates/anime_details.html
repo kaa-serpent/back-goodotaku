@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title>Sakila - Ville</title>
+</head>
+
+<body>
+
+<div class="card w3-padding-16">
+    <a href="/animu/${animes.id}">
+        <img class="card-img-top" width="300" height="400"
+             th:src="${animes.imgSrc}"
+              />
+    </a>
+    <h1><p th:text="${animes.title}" /></h1>
+    <p class="price">
+    <p th:text="'Auteur : ' +${animes.author}" />
+    </p>
+    <p>
+    <h2>Description</h2>
+    <p th:text="${animes.description}" /></p>
+
+    <a th:href="@{'/animes/list/details/edit/' + ${animes.id}}" class="w3-button w3-block w3-dark-grey" >Modifier</a>
+</div>
+<br>
+<div class="w3-card-4 w3-third w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Genre</h3>
+    </header>
+
+    <div class="w3-container">
+        <div>
+            <th:block th:each="gen: ${animes.genres}">
+                <p th:text="${gen.name}" />
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<div class="w3-card-4 w3-half w3-right w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Commentaires</h3>
+    </header>
+
+    <div class="w3-container">
+        <div class="ui-icon-star">
+            <th:block th:each="rev: ${animes.review}">
+                <p th:text="${rev.review}" />
+                <p th:text="'Note : ' + ${rev.note} + '/5'" />
+                <p><a th:href="@{'/animes/list/details/delete/' + ${rev.id}}" class="w3-button w3-red w3-round-large">Supprimer</a></p>
+                <hr>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

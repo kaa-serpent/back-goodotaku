@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title></title>
+</head>
+
+<body>
+<h1 class="w3-center">Liste des Animés</h1>
+<br>
+<a class="w3-button w3-green" th:href="@{/}">Retour</a>
+<br>
+<table class="w3-table-all w3-centered">
+    <thead>
+    <tr class="w3-blue">
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ans : ${animes}">
+        <td th:text="${ans.id}"></td>
+        <td><img th:src="${ans.imgSrc}" width="75" height="100">
+        </td>
+        <td th:text="${ans.title}"></td>
+        <td th:text="${ans.description}"></td>
+        <td>
+            <div class="w3-dropdown-hover">
+                <button class="w3-button">Genre</button>
+                <div class="w3-dropdown-content w3-bar-block w3-border">
+                    <p th:each="genre: ${ans.genres}">
+                        <span th:text="${genre.name}">Genre</span>
+                    </p>
+                </div>
+            </div>
+        </td>
+        <td><a th:href="@{'/animes/list/details/' + ${ans.id}}" class="w3-button w3-red w3-round-large">Edit</a></td>
+        <td><a th:href="@{/animes/create}" class="w3-button w3-red w3-round-large">Ajout</a></td>
+        <td><a th:href="@{'/animes/list/delete/' + ${ans.id}}" class="w3-button w3-red w3-round-large">Supprimer</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title>Sakila - Ville</title>
+</head>
+
+<body>
+<h1 class="w3-center">Liste des Animes</h1>
+<br>
+<a class="w3-button w3-green" th:href="@{/}">Retour</a>
+<br>
+<table class="w3-table-all w3-centered">
+    <thead>
+    <tr class="w3-blue">
+        <th></th>
+        <th>Nom</th>
+        <th>Synopsis</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ats : ${animus}">
+        <td><img class="card-img-top"
+                 th:src="${ats.getJSONObject('attributes').getJSONObject('posterImage').getString('tiny')}"
+                 th:alt="${ats.getJSONObject('attributes').getString('slug')}" /></td>
+        <td th:text="${ats.getJSONObject('attributes').getString('slug')}"></td>
+        <td th:text="${ats.getJSONObject('attributes').getString('synopsis')}"></td>
+        <td><a th:href="@{'/animu/' + ${ats.getString('id')}}" class="w3-button w3-red w3-round-large">Details</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

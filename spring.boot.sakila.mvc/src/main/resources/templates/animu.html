@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title>Sakila - Ville</title>
+</head>
+
+<body>
+
+<div class="card w3-padding-16">
+    <a href="/animu/${anime.getString('id')}">
+        <img class="card-img-top" width="300" height="400"
+             th:src="${anime.getJSONObject('attributes').getJSONObject('posterImage').getString('large')}"
+             th:alt="${anime.getJSONObject('attributes').getString('slug')}" />
+    </a>
+    <h1><p th:text="${anime.getJSONObject('attributes').getString('slug')}" /></h1>
+    <p class="price">
+    <p th:text="'Date de création : ' +${anime.getJSONObject('attributes').getString('startDate')}" />
+    <p th:text="'Date dernier épisode : ' +${anime.getJSONObject('attributes').getString('endDate')}" />
+    </p>
+    <p>
+    <h2>Description</h2>
+    <p th:text="${anime.getJSONObject('attributes').getString('synopsis')}" /></p>
+    <h2>Episode</h2>
+    <th:block th:each="eps: ${episodes}">
+        <p th:text="${eps.getJSONObject('attributes').getString('canonicalTitle')} == 'null' ? 'L animé de possède pas d épisode' : ${eps.getJSONObject('attributes').getString('canonicalTitle')}" />
+        <hr>
+    </th:block>
+</div>
+<br>
+<div class="w3-card-4 w3-third w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Genre</h3>
+    </header>
+
+    <div class="w3-container">
+        <div>
+            <th:block th:each="gen: ${genres}">
+                <p th:text="${gen.getJSONObject('attributes').getString('name')}" />
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<div class="w3-card-4 w3-half w3-right w3-margin">
+
+    <header class="w3-container w3-light-grey">
+        <h3>Commentaires</h3>
+    </header>
+
+    <div class="w3-container">
+        <div class="ui-icon-star">
+            <th:block th:each="rev: ${reviews}">
+                <p th:text="${rev.getJSONObject('attributes').getString('content')}" />
+                <p class="w3-gray" th:text="'Date publication' +${rev.getJSONObject('attributes').getString('createdAt')}" />
+                <p><a th:href="@{'/animu/' + ${rev.getString('id')}}" class="w3-button w3-red w3-round-large">Supprimer</a></p>
+                <hr>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

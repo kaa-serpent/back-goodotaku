@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title>Indexe Sakila</title>
+</head>
+
+<body>
+<div class="w3-card-4 w3-center ">
+
+    <header class="w3-container w3-blue">
+        <h1>Bienvenue sur le site SAKILA</h1>
+    </header>
+
+    <div class="w3-container">
+        <table class="w3-table w3-centered">
+            <tr>
+                <th>Liste Animes</th>
+                <th>Liste Utilisateur</th>
+
+            </tr>
+            <tr>
+                <td><a th:href="@{/animes/list}" class="w3-button w3-red w3-round-large">Voir</a></td>
+                <td><a th:href="@{/users}" class="w3-button w3-red w3-round-large">Voir</a></td>
+            </tr>
+        </table>
+        <br>
+    </div>
+    <br>
+
+    <footer class="w3-container w3-blue">
+        <h5 th:text="${message}"></h5>
+    </footer>
+
+</div>
+</body>
+</html>

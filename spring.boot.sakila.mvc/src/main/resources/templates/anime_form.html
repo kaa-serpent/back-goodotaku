@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+</head>
+
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Edit User</h1>
+    </div>
+    <form th:action="@{/animes/save}" th:object="${animes}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+        <input type="hidden" th:field="*{id}" />
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Titre: </label>
+                <div class="col-8">
+                    <img th:src="${animes.imgSrc}" width="75" height="100">
+                    <input type="text" th:field="*{title}" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Image: </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{imgSrc}" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Auteur : </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{author}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Description : </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{description}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Année de création : </label>
+                <div class="col-8">
+                    <input type="number" th:field="*{year}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Genre: </label>
+                <div class="col-8">
+                    <th:block th:each="genre: ${listGenres}">
+                        <input type="checkbox" th:field="*{genres}"
+                               th:text="${genre.name}" th:value="${genre.id}" class="m-2" />
+                    </th:block>
+                </div>
+            </div>
+
+            <div class="w3-container" style="display: none;">
+                <div class="ui-icon-star">
+                    <th:block th:each="rev: ${animes.review}">
+                        <input type="hidden" th:field="*{review}"
+                                />
+                    </th:block>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

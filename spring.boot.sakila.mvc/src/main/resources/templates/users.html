@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:rel="stylesheet" th:href="@{/css/w3.css}"/>
+    <title>Sakila - Pays</title>
+</head>
+
+<body>
+<h1 class="w3-center">Liste des utilisateurs</h1>
+<br>
+<a class="w3-button w3-green" th:href="@{/}">Retour</a>
+<br>
+<table class="w3-table-all w3-centered">
+    <thead>
+    <tr class="w3-blue">
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usr : ${users}">
+        <td th:text="${usr.id}"></td>
+        <td th:text="${usr.username}"></td>
+        <td th:text="${usr.email}"></td>
+        <td>
+            <div class="w3-dropdown-hover">
+                <button class="w3-button">Role</button>
+                <div class="w3-dropdown-content w3-bar-block w3-border">
+            <p th:each="role: ${usr.roles}">
+            <span th:text="${role.name}">Role</span>
+        </p>
+                </div>
+            </div>
+        </td>
+        <td><a th:href="@{'/users/list/edit/' + ${usr.id}}" class="w3-button w3-red w3-round-large">Edit</a></td>
+        <td><a th:href="@{'/users/create'}" class="w3-button w3-red w3-round-large">Ajouter</a></td>
+        <td><a th:href="@{'/users/list/delete/' + ${usr.id}}" class="w3-button w3-red w3-round-large">Delete</a></td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
